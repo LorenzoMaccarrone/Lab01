@@ -151,33 +151,4 @@ def main ():
 
                            return 0
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   # adesso ho nel vettore question tutti gli oggetti di tipo domanda con i loro attributi corretti
-'''DA CANCELLARE (consigli su come proseguire)
-PER ADESSO: abbiamo la lista question con tutte le domande da proporre
-Dobbiamo ancora fare alcune cose
-0)implementare il meccanismo di vincita o perdita del gioco (insieme alla 3)
-1)implementare la possibilità di randomizzare le 3 risposte ad ogni domanda tenendo traccia di quale sia quella giusta
-2)implementare la possibilità di randomizzare le domande per ogni livello di difficotà in modo che non escano in
-ordine sempre le stesse domande
-3)implementare i punteggi con il nickname relativo, e quindi chiedere il nick che ci servirà per salvare i punteggi
-nel file punti.txt (ps visto che si esce quando si sbaglia e si guadagna un punto per ogni domanda giusta
-basta guardare a che livello di difficoltà è arrivato il tipo quando finisce il programma, o perchè ha sbagliato o
-perchè ha vinto)
-4)stampare i punteggi nel file punti.txt'''
-
 main()
