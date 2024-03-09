@@ -82,73 +82,69 @@ def main ():
    random.shuffle(domande_shuffled)
    livello_attuale=0
    #ciclo per far funzionare il gioco
-   while vincita==0 & perdita==0:
-       print("RISPONDI ALLE SEGUENTI DOMANDE")
-       for q in domande_shuffled:
-           if livello_attuale==livello_massimo+1:
-               print("Bravo hai vinto!")
+   print("RISPONDI ALLE SEGUENTI DOMANDE")
+   for q in domande_shuffled:
+       if livello_attuale == livello_massimo + 1:
+           print("Bravo hai vinto!")
 
-               #agiorniamo e stampiamo la leaderboard nel file
-               nome_giocatore=input("Dimmi il tuo nickname per la Leaderboard")
-               nome_punteggio=NicknamePunteggio(nome_giocatore,livello_attuale-1)
-               giocatore_trovato = 0
-               for p in punteggi:
-                   if p.nickname==nome_giocatore:
-                       p.punteggio=livello_attuale-1
-                       giocatore_trovato=1
-                       punteggi = sorted(punteggi, key=lambda NicknamePunteggio: NicknamePunteggio.punteggio,
-                                         reverse=True)
-               if giocatore_trovato == 0:
-                   punteggi.append(NicknamePunteggio(nome_giocatore, livello_attuale-1))
-                   punteggi = sorted(punteggi, key=lambda punteggio: punteggio,reverse=True)
-                   for p in punteggi:
-                       if p.punteggio == -1:
-                           p.punteggio = 0
-               f = open("punti.txt", "w")
-               for x in punteggi:
-                   f.write(f"{x.nickname} {x.punteggio}\n")
-               f.close()
-               return 0
+           # agiorniamo e stampiamo la leaderboard nel file
+           nome_giocatore = input("Dimmi il tuo nickname per la Leaderboard")
+           nome_punteggio = NicknamePunteggio(nome_giocatore, livello_attuale)
+           giocatore_trovato = 0
+           for p in punteggi:
+               if p.nickname == nome_giocatore:
+                   p.punteggio = livello_attuale
+                   giocatore_trovato = 1
+                   punteggi = sorted(punteggi, key=lambda NicknamePunteggio: NicknamePunteggio.punteggio,
+                                     reverse=True)
+           if giocatore_trovato == 0:
+               punteggi.append(NicknamePunteggio(nome_giocatore, livello_attuale))
+               punteggi = sorted(punteggi, key=lambda NicknamePunteggio: NicknamePunteggio.punteggio,
+                                 reverse=True)
+           f = open("punti.txt", "w")
+           for x in punteggi:
+               f.write(f"{x.nickname} {x.punteggio}\n")
+           f.close()
+           return 0
+
+       if q.livello == livello_attuale:
+           risposte_shuffled = list(q.risposte)
+           random.shuffle(risposte_shuffled)
+           print(f"{q.domanda} (LIVELLO DOMANDA = {q.livello})\n")
+           for i in risposte_shuffled:
+               print(f"{i}\n")
+           val = int(input("Quale di queste è giusta (scrivi il numero corrispondente)?"))
+           for r in risposte_shuffled:
+               if r.corretta == 1:
+                   x = risposte_shuffled.index(r) + 1
+                   if val == x:
+                       "Passi al prossimo round"
+                       livello_attuale += 1
+                   else:
+                       perdita = 1
+                       print("No, è sbagliata, HAI PERSO")
+                       # agiorniamo e stampiamo la leaderboard nel file
+                       nome_giocatore = input("Dimmi il tuo nickname per la Leaderboard")
+                       nome_punteggio = NicknamePunteggio(nome_giocatore, livello_attuale)
+                       giocatore_trovato = 0
+                       for p in punteggi:
+                           if p.nickname == nome_giocatore:
+                               p.punteggio = livello_attuale
+                               giocatore_trovato = 1
+                               punteggi = sorted(punteggi,
+                                                 key=lambda NicknamePunteggio: NicknamePunteggio.punteggio,
+                                                 reverse=True)
+                       if giocatore_trovato == 0:
+                           punteggi.append(NicknamePunteggio(nome_giocatore, livello_attuale))
+                           punteggi = sorted(punteggi, key=lambda NicknamePunteggio: NicknamePunteggio.punteggio,
+                                             reverse=True)
+                       f = open("punti.txt", "w")
+                       for x in punteggi:
+                           f.write(f"{x.nickname} {x.punteggio}\n")
+                       f.close()
+
+                       return 0
 
 
-           if q.livello == livello_attuale:
-               risposte_shuffled=list(q.risposte)
-               random.shuffle(risposte_shuffled)
-               print(f"{q.domanda} (LIVELLO DOMANDA = {q.livello})\n")
-               for i in risposte_shuffled:
-                   print(f"{i}\n")
-               val=int(input("Quale di queste è giusta (scrivi il numero corrispondente)?"))
-               for r in risposte_shuffled:
-                   if r.corretta==1:
-                       x=risposte_shuffled.index(r)+1
-                       if val==x:
-                           "Passi al prossimo round"
-                           livello_attuale+=1
-                       else:
-                           perdita=1
-                           print("No, è sbagliata, HAI PERSO")
-                           # agiorniamo e stampiamo la leaderboard nel file
-                           nome_giocatore = input("Dimmi il tuo nickname per la Leaderboard")
-                           nome_punteggio = NicknamePunteggio(nome_giocatore, livello_attuale-1)
-                           giocatore_trovato = 0
-                           for p in punteggi:
-                               if p.nickname == nome_giocatore:
-                                   p.punteggio = livello_attuale-1
-                                   giocatore_trovato = 1
-                                   punteggi = sorted(punteggi,
-                                                     key=lambda NicknamePunteggio: NicknamePunteggio.punteggio,
-                                                     reverse=True)
-                           if giocatore_trovato == 0:
-                               punteggi.append(NicknamePunteggio(nome_giocatore, livello_attuale-1))
-                               punteggi = sorted(punteggi, key=lambda NicknamePunteggio: NicknamePunteggio.punteggio, reverse=True)
-                           for p in punteggi:
-                               if p.punteggio==-1:
-                                   p.punteggio=0
-                           f = open("punti.txt", "w")
-                           for x in punteggi:
-                               f.write(f"{x.nickname} {x.punteggio}\n")
-                           f.close()
-
-                           return 0
 
 main()

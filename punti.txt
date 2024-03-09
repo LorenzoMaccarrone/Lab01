@@ -1,6 +1,9 @@
+Davide 5
 Paolo 4
-Lorenzo 2
+Lorenzo 3
+Francesco 3
 Lucia 1
 Mario 1
+Tony 1
 Giuseppe 0
 Emanuele 0
